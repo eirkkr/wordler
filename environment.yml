@@ -3,4 +3,8 @@ channels:
   - conda-forge
 dependencies:
   # linting
+  - bandit
   - black
+  - flake8
+  - mypy
+  - pylint
