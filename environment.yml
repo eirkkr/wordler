@@ -1,0 +1,6 @@
+name: wordler
+channels:
+  - conda-forge
+dependencies:
+  # linting
+  - black
