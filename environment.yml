@@ -1,0 +1,4 @@
+name: wordler
+channels:
+  - defaults
+prefix: /home/eirkkr/miniconda3/envs/wordler
