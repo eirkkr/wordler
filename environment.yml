@@ -1,4 +1,6 @@
 name: wordler
 channels:
-  - defaults
-prefix: /home/eirkkr/miniconda3/envs/wordler
+  - conda-forge
+dependencies:
+  # linting
+  - black
