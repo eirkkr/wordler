@@ -8,6 +8,9 @@ import string
 from typing import List
 from typing import Dict
 
+# Letters per word.
+_LETTERS: int = 5
+
 
 class Wordler:
     """
@@ -20,18 +23,21 @@ class Wordler:
 
         self._all_words = _load_word_list()
         self._words = _load_word_list()
-
-        alphabet = string.ascii_lowercase
-
-        self._letters: List[str] = [
-            alphabet,
-            alphabet,
-            alphabet,
-            alphabet,
-            alphabet,
-        ]
-
         self._guesses: Dict[str, str] = {}
+
+        # Create list of possible letters for each position.
+        alphabet = string.ascii_lowercase
+        self._letters = []
+        for i in range(_LETTERS):
+            self._letters.append(alphabet)
+
+        # Construct regular expression to test words.
+        self._regex = ""
+
+        for i in range(_LETTERS):
+            self._regex = rf"{self._regex}[{self._letters[i]}]"
+
+        self._regex = f"^{self._regex}$"
 
     def main(self) -> None:
         """
@@ -44,8 +50,6 @@ class Wordler:
             self._update_words()
             print(f"Valid letters: {self._letters}")
             print(f"{len(self._words)} valid words remain.")
-
-        pass
 
     def _guess_a_word(self):
 
@@ -78,10 +82,11 @@ class Wordler:
 
     def _update_letters(self) -> None:
 
-        for i in range(4):
-            for letter, letter_score in self._guesses.items():
-                breakpoint()
-                if letter_score == "2":
+        for i in range(_LETTERS):
+            print(i)
+
+            for letter in self._guesses:
+                if letter[i] == "2":
                     self._letters[i] = letter
                 else:
                     self._letters[i].replace(letter, "")
