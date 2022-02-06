@@ -11,6 +11,9 @@ from typing import Dict
 # Letters per word.
 _LETTERS: int = 5
 
+# Number of guesses allowed.
+_GUESSES: int = 6
+
 
 class Wordler:
     """
@@ -44,7 +47,7 @@ class Wordler:
         Wordler.
         """
 
-        while len(self._guesses) < 6:
+        while len(self._guesses) < _GUESSES:
             self._guess_a_word()
             self._update_letters()
             self._update_words()
