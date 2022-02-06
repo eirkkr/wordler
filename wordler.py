@@ -4,6 +4,7 @@ Wordler.
 
 import pathlib
 import re
+import string
 from typing import List
 from typing import Dict
 
@@ -15,11 +16,22 @@ class Wordler:
 
     def __init__(self) -> None:
 
+        _display_instructions()
+
         self._all_words = _load_word_list()
         self._words = _load_word_list()
-        self._guesses: Dict[str, str] = {}
 
-        _display_instructions()
+        alphabet = string.ascii_lowercase
+
+        self._letters: List[str] = [
+            alphabet,
+            alphabet,
+            alphabet,
+            alphabet,
+            alphabet,
+        ]
+
+        self._guesses: Dict[str, str] = {}
 
     def main(self) -> None:
         """
@@ -28,6 +40,12 @@ class Wordler:
 
         while len(self._guesses) < 6:
             self._guess_a_word()
+            self._update_letters()
+            self._update_words()
+            print(f"Valid letters: {self._letters}")
+            print(f"{len(self._words)} valid words remain.")
+
+        pass
 
     def _guess_a_word(self):
 
@@ -58,7 +76,25 @@ class Wordler:
 
         self._guesses[guess] = score
 
-        print(self._guesses)
+    def _update_letters(self) -> None:
+
+        for i in range(4):
+            for letter, letter_score in self._guesses.items():
+                breakpoint()
+                if letter_score == "2":
+                    self._letters[i] = letter
+                else:
+                    self._letters[i].replace(letter, "")
+
+    def _update_words(self) -> None:
+
+        # new_word_list = self._words
+
+        # for letter in self._letters:
+        #     for word in self._words:
+        #         if letter in word
+
+        pass
 
 
 def _load_word_list() -> List[str]:
