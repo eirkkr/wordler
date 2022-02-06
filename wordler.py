@@ -4,7 +4,8 @@ Wordler.
 
 import pathlib
 import re
-from typing import List, Tuple
+from typing import List
+from typing import Dict
 
 
 class Wordler:
@@ -16,10 +17,16 @@ class Wordler:
 
         self._all_words = self._load_word_list()
         self._words = self._load_word_list()
+        self._guesses: Dict[str, str] = {}
 
         _display_instructions()
 
-        self._guess_words()
+        self._main()
+
+    def _main(self) -> None:
+
+        while len(self._guesses) < 6:
+            self._guess_a_word()
 
     def _load_word_list(self) -> List[str]:
         path = pathlib.Path(__file__).parent / "word_list.txt"
@@ -33,19 +40,14 @@ class Wordler:
 
         return words
 
-    def _guess_words(self) -> None:
-
-        guess = self._guess_a_word()
-
-        guesses = {guess[0]: guess[1]}
-
-    def _guess_a_word(self) -> Tuple[str, str]:
+    def _guess_a_word(self):
 
         guess_is_valid = False
         score_is_valid = False
 
         valid_score_regex = r"[012]{5}"
 
+        # Ask for a guess from user.
         while not guess_is_valid:
 
             guess = input("Guess a word: ")
@@ -55,6 +57,7 @@ class Wordler:
             else:
                 guess_is_valid = True
 
+        # Ask for a score from user.
         while not score_is_valid:
 
             score = input("Word score: ")
@@ -64,12 +67,14 @@ class Wordler:
             else:
                 score_is_valid = True
 
-        return guess, score
+        self._guesses[guess] = score
+
+        print(self._guesses)
 
 
 def _display_instructions() -> None:
     instructions = """
-    Wordle Solver.
+    Wordle solver.
     """
 
     print(instructions)
