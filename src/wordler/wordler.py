@@ -84,15 +84,14 @@ class Wordler:
         self._guesses[guess] = score
 
     def _update_letters(self) -> None:
+        # TODO: Validate score, e.g. can't say 2 of the same letter is correct.
 
-        for i in range(_LETTERS):
-            print(i)
-
-            for letter in self._guesses:
-                if letter[i] == "2":
-                    self._letters[i] = letter
+        for guess, score in self._guesses.items():
+            for i in range(_LETTERS):
+                if score[i] == "2":
+                    self._letters[i] = guess[i]
                 else:
-                    self._letters[i].replace(letter, "")
+                    self._letters[i] = self._letters[i].replace(guess[i], "")
 
     def _update_words(self) -> None:
 
