@@ -40,8 +40,6 @@ class Wordler:
         for i in range(_LETTERS):
             self._regex = rf"{self._regex}[{self._letters[i]}]"
 
-        self._regex = f"^{self._regex}$"
-
     def main(self) -> None:
         """
         Wordler.
@@ -49,10 +47,10 @@ class Wordler:
 
         while len(self._guesses) < _GUESSES:
             self._guess_a_word()
-            self._update_letters()
-            self._update_words()
+            self._update_regex()
             print(f"Valid letters: {self._letters}")
             print(f"{len(self._words)} valid words remain.")
+            print(f"regex: {self._regex}")
 
     def _guess_a_word(self):
 
@@ -83,25 +81,23 @@ class Wordler:
 
         self._guesses[guess] = score
 
-    def _update_letters(self) -> None:
+        self._update_letters(guess, score)
+
+    def _update_letters(self, guess, score) -> None:
         # TODO: Validate score, e.g. can't say 2 of the same letter is correct.
 
-        for guess, score in self._guesses.items():
-            for i in range(_LETTERS):
-                if score[i] == "2":
-                    self._letters[i] = guess[i]
-                else:
-                    self._letters[i] = self._letters[i].replace(guess[i], "")
+        for i in range(_LETTERS):
+            if score[i] == "2":
+                self._letters[i] = guess[i]
+            else:
+                self._letters[i] = self._letters[i].replace(guess[i], "")
 
-    def _update_words(self) -> None:
+    def _update_regex(self) -> None:
 
-        # new_word_list = self._words
+        self._regex = ""
 
-        # for letter in self._letters:
-        #     for word in self._words:
-        #         if letter in word
-
-        pass
+        for i in range(_LETTERS):
+            self._regex = rf"{self._regex}[{self._letters[i]}]"
 
 
 def _load_word_list() -> List[str]:
