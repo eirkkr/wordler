@@ -4,21 +4,21 @@ all: lint
 
 # Test folder excluded
 bandit:
-	bandit -r finance
+	bandit -r wordler
 
 black:
-	black finance tests --check --verbose
+	black wordler tests --check --verbose
 
 flake8:
-	flake8 finance tests
+	flake8 wordler tests
 
 isort:
-	isort finance tests --diff
+	isort wordler tests --diff
 
 mypy:
-	mypy -m finance -m tests
+	mypy -m wordler -m tests
 
 pylint:
-	pylint finance tests
+	pylint wordler tests
 
 lint: bandit black flake8 isort mypy pylint
