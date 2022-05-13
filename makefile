@@ -10,7 +10,7 @@ black:
 	black wordler tests --check --verbose
 
 flake8:
-	flake8 wordler tests
+	flake8 wordler tests --max-line-length=88 --max-doc-length=79
 
 isort:
 	isort wordler tests --diff
