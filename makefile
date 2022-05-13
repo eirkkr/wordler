@@ -7,18 +7,18 @@ bandit:
 	bandit -r wordler
 
 black:
-	black wordler tests --check --verbose
+	black wordler --check --verbose
 
 flake8:
-	flake8 wordler tests --max-line-length=88 --max-doc-length=79
+	flake8 wordler --max-line-length=88 --max-doc-length=79
 
 isort:
-	isort wordler tests --diff
+	isort wordler--diff
 
 mypy:
-	mypy -m wordler -m tests
+	mypy -m wordler
 
 pylint:
-	pylint wordler tests
+	pylint wordler
 
 lint: bandit black flake8 isort mypy pylint
