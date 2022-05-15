@@ -13,7 +13,7 @@ flake8:
 	flake8 wordler --max-line-length=88 --max-doc-length=79
 
 isort:
-	isort wordler--diff
+	isort wordler --diff
 
 mypy:
 	mypy -m wordler

@@ -6,8 +6,8 @@ Wordler.
 import pathlib
 import re
 import string
-from typing import List
 from typing import Dict
+from typing import List
 
 # Letters per word.
 _LETTERS: int = 5
@@ -40,6 +40,8 @@ class Wordler:
 
         for i in range(_LETTERS):
             self._regex = rf"{self._regex}[{self._letters[i]}]"
+
+        print(self._regex)
 
     def main(self) -> None:
         """
@@ -95,12 +97,6 @@ class Wordler:
     # TODO: Validate score, e.g. can't say 2 of the same letter is correct.
 
     def _update_letters(self, guess, score) -> None:
-        # TODO: This is incomplete, it currently only checks if a letter is
-        # correct. It needs to also check for things such as letters which can
-        # be removed from all spots (score of zero).
-        #
-        # In addition, it might need a separate regex to check for matches on
-        # letters which are correct but in the wrong spot.
 
         for i in range(_LETTERS):
             if score[i] == "2":
